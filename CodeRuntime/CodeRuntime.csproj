@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;Component</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;Component1</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeRuntime.cs" />
     <Compile Include="Component\Common\Tools.cs" />
     <Compile Include="Component\DebugLog.cs" />
     <Compile Include="Component\DebugLogHttpModule.cs" />
