@@ -119,7 +119,7 @@ namespace CodeRuntime
         {
             CheckCode(code);
             MethodConstruct methodC = new MethodConstruct();
-            var method = methodC.Generator(code, reference).CreateDelegate(typeof(Func<TResult>)) as Func<TResult>;
+            var method = methodC.Generator(code, typeof(TResult), reference).CreateDelegate(typeof(Func<TResult>)) as Func<TResult>;
             return method;
         }
 

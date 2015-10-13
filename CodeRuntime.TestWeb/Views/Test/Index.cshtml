@@ -1,0 +1,45 @@
+﻿@model object
+@{
+    Layout = null;
+    var ex = ViewBag.Error as Exception;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TestCode</title>
+</head>
+<body>
+    @if (Model != null)
+    {
+        <div>
+            结果 :
+            <div>
+                <pre>
+@Model.ToString()
+</pre>
+            </div>
+        </div>
+    }
+    @if (ex != null)
+    {
+        <div style="color:red;">
+            发生错误 :
+            <div>
+                @ex.ToString()
+            </div>
+        </div>
+    }
+    <div>
+        <form method="post" action="/test">
+            需要引用的程序集:
+            <textarea name="reference" cols="50" rows="50">@ViewBag.Reference</textarea>
+            Code:
+            <textarea name="code" cols="150" rows="50">@ViewBag.Code</textarea>
+            <input type="submit" value="提交" />
+        </form>
+    </div>
+</body>
+</html>
