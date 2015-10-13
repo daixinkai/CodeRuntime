@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Component\Common\Tools.cs" />
+    <Compile Include="Component\DebugLog.cs" />
+    <Compile Include="Component\DebugLogHttpModule.cs" />
     <Compile Include="Component\MethodConstruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
