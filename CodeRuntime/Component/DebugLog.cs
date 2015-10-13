@@ -2,26 +2,39 @@
 using CodeRuntime;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-
+[assembly: PreApplicationStartMethod(typeof(DebugLog), "Register")]
 namespace System
 {
-    //[PreApplicationStartMethod(typeof(WebApplication1.Test.PreApplicationStartCode), "PreStart")]
     public sealed class DebugLog
     {
 
-        static bool _isRegister = false;
+        static readonly bool _defaultRegister = true;
 
+        static bool _isRegister = false;
+        /// <summary>
+        /// 注册模块,请在
+        /// </summary>
         public static void Register()
         {
             if (_isRegister)
             {
                 return;
             }
-            HttpApplication.RegisterModule(typeof(DebugLogHttpModule));
+            //是否注册模块
+            bool register = false;
+            if (!bool.TryParse(ConfigurationManager.AppSettings["DebugLog"], out register))
+            {
+                register = _defaultRegister;
+            }
+            if (register)
+            {                
+                HttpApplication.RegisterModule(typeof(DebugLogHttpModule));
+            }
             _isRegister = true;
         }
 

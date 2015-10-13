@@ -187,7 +187,9 @@ namespace CodeRuntime
 }
 namespace System
 {
-    //[PreApplicationStartMethod(typeof(WebApplication1.Test.PreApplicationStartCode), "PreStart")]
+    /// <summary>
+    /// 提供日志输出功能(线程回话唯一)
+    /// </summary>
     public sealed class DebugLog
     {
 
