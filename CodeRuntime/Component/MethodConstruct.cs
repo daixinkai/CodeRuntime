@@ -122,11 +122,61 @@ namespace CodeRuntime
             var method = methodC.Generator(code, typeof(TResult), reference).CreateDelegate(typeof(Func<TResult>)) as Func<TResult>;
             return method;
         }
+        public static Delegate CreateMethod(string code, Type returnType, params string[] reference)
+        {
+            CheckCode(code);
+            MethodConstruct methodC = new MethodConstruct();
+            var type = typeof(Func<>);
+            type = type.MakeGenericType(returnType);
+            var method = methodC.Generator(code, returnType, reference).CreateDelegate(type);
+            return method;
+        }
+
+        public static void Run(string code, params string[] reference)
+        {
+            if (IsReturnValue(code))
+            {
+                var func = CreateMethod<object>(code, reference);
+                func();
+            }
+            var action = CreateMethod(code, reference);
+            action();
+        }
+
+        public static TResult Run<TResult>(string code, params string[] reference)
+        {
+            if (IsReturnValue(code))
+            {
+                var func = CreateMethod<TResult>(code, reference);
+                return func();
+            }
+            var action = CreateMethod(code, reference);
+            action();
+            return default(TResult);
+        }
+
+        public static object Run(string code, Type returnType, params string[] reference)
+        {
+            if (IsReturnValue(code))
+            {
+                var func = CreateMethod(code, returnType, reference);
+                return ((dynamic)func)();
+            }
+            var action = CreateMethod(code, reference);
+            action();
+            return null;
+        }
 
 
         static void CheckCode(string code)
         {
 
+        }
+
+        static bool IsReturnValue(string code)
+        {
+            CheckCode(code);
+            return code.Contains("return");
         }
 
     }

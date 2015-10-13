@@ -12,8 +12,6 @@ namespace CodeRuntime.TestWeb.Controllers
         public ActionResult Index()
         {
             return View();
-            DebugLog.WriteLine("test");
-            return Content(DebugLog.Message);
         }
 
         [HttpPost]
@@ -24,20 +22,14 @@ namespace CodeRuntime.TestWeb.Controllers
             object result = null;
             try
             {
-
                 if (!string.IsNullOrEmpty(reference))
                 {
                     var rr = reference.Split(new char[] { ';', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-
-                    var te = MethodConstruct.CreateMethod<object>(code, rr);
-
-                    result = te();
+                    result = MethodConstruct.Run<object>(code, rr);
                 }
                 else
                 {
-                    var te = MethodConstruct.CreateMethod<object>(code);
-
-                    result = te();
+                    result = MethodConstruct.Run<object>(code);
                 }
                 string debugger = DebugLog.Message;
                 result = debugger + "\r\n" + result;

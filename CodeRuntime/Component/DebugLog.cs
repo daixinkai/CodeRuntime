@@ -13,12 +13,13 @@ namespace System
     public sealed class DebugLog
     {
 
-        static readonly bool _defaultRegister = true;
+#if DEBUG
+               static readonly bool _defaultRegister = true;
+#else
+        static readonly bool _defaultRegister = false;
+#endif
 
         static bool _isRegister = false;
-        /// <summary>
-        /// 注册模块,请在
-        /// </summary>
         public static void Register()
         {
             if (_isRegister)
@@ -32,7 +33,7 @@ namespace System
                 register = _defaultRegister;
             }
             if (register)
-            {                
+            {
                 HttpApplication.RegisterModule(typeof(DebugLogHttpModule));
             }
             _isRegister = true;
