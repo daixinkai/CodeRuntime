@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if Component
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -39,3 +40,5 @@ namespace CodeRuntime.Common
 
     }
 }
+
+#endif
